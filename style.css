@@ -85,15 +85,6 @@ body {
 #scrollable-area {
   width: 50000px;
   height: 50000px;
-  position: relative;
   background-image: url("./img/forest-tile-512x512.jpg");
   background-repeat: repeat;
-}
-
-#center-point {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1px;
-  height: 1px;
 }

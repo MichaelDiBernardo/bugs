@@ -26,13 +26,4 @@ document.addEventListener("load", function () {
     const walkY = (y - startY) * 2;
     window.scrollTo(scrollLeft - walkX, scrollTop - walkY);
   });
-
-  const centerPoint = document.getElementById("center-point");
-
-  // Scroll to the center point
-  centerPoint.scrollIntoView({
-    behavior: "auto",
-    block: "center",
-    inline: "center",
-  });
 });
