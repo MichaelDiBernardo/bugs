@@ -1,20 +1,5 @@
-const viewportDimensions = {
-  x: 50000,
-  y: 50000,
-};
-
 document.addEventListener("load", function () {
   const scrollableArea = document.getElementById("scrollable-area");
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-
-  // Calculate the center position
-  const scrollToX = (viewportDimensions.x - viewportWidth) / 2;
-  const scrollToY = (viewportDimensions.y - viewportHeight) / 2;
-
-  console.log(`Center is: ${scrollToX}, ${scrollToY}`);
-  // Set the initial scroll position
-  window.scrollTo(scrollToX, scrollToY);
 
   // Prevent default touch behavior to allow custom scrolling
   scrollableArea.addEventListener(
@@ -40,5 +25,14 @@ document.addEventListener("load", function () {
     const walkX = (x - startX) * 2; // Adjust scrolling speed if needed
     const walkY = (y - startY) * 2;
     window.scrollTo(scrollLeft - walkX, scrollTop - walkY);
+  });
+
+  const centerPoint = document.getElementById("center-point");
+
+  // Scroll to the center point
+  centerPoint.scrollIntoView({
+    behavior: "auto",
+    block: "center",
+    inline: "center",
   });
 });
