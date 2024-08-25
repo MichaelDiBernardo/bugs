@@ -1,14 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const rocksContainer = document.getElementById("rocks-container");
-  const rockTemplate = document.getElementById("rock-template");
-  const numRocks = 20; // Number of rocks to create
+const numRocks = 1000;
+const gridSize = 51200 / 256;
 
-  function createRock() {
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollableArea = document.getElementById("scrollable-area");
+  const rockTemplate = document.getElementById("rock-template");
+
+  function createRockComponent(location) {
     const rock = rockTemplate.content.cloneNode(true).querySelector(".rock");
-    rock.style.left = `${Math.random() * 100}%`;
-    rock.style.top = `${Math.random() * 100}%`;
+    rock.style.gridRow = location.x;
+    rock.style.gridColumn = location.y;
     rock.addEventListener("click", flingRock);
-    rocksContainer.appendChild(rock);
+    scrollableArea.appendChild(rock);
+  }
+
+  function createRocks() {
+    const rockLocations = [];
+    while (rockLocations.length < numRocks) {
+      const newRockLocation = {
+        x: Math.floor(Math.random() * gridSize),
+        y: Math.floor(Math.random() * gridSize),
+      };
+
+      if (
+        rockLocations.find(
+          (l) => l.x === newRockLocation.x && l.y === newRockLocation.y
+        )
+      ) {
+        continue;
+      }
+
+      rockLocations.push(newRockLocation);
+    }
+
+    for (const location of rockLocations) {
+      createRockComponent(location);
+    }
   }
 
   function flingRock(event) {
@@ -28,7 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }, duration);
   }
 
-  for (let i = 0; i < numRocks; i++) {
-    createRock();
+  function initialize() {
+    createRocks();
   }
+
+  initialize();
 });

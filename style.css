@@ -83,14 +83,16 @@ body {
 }
 
 #scrollable-area {
-  width: 50000px;
-  height: 50000px;
+  width: 51200px;
+  height: 51200px;
   background-image: url("./img/forest-tile-512x512.jpg");
   background-repeat: repeat;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 256px);
+  grid-template-rows: repeat(auto-fill, 256px);
 }
 
 .rock {
-  position: absolute;
   width: 256px;
   height: 256px;
   cursor: pointer;
