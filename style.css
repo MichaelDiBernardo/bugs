@@ -1,4 +1,9 @@
 /*
+	The first numbered steps are CSS reset from here:
+	https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+/*
   1. Use a more-intuitive box-sizing model.
 */
 *,
@@ -16,11 +21,15 @@
   Typographic tweaks!
   3. Add accessible line-height
   4. Improve text rendering
-*/
-body {
+
+	Mike's notes: I don't need these. Nora can't read.
+
+ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-}
+} 
+*/
+
 /*
   5. Improve media defaults
 */
@@ -32,8 +41,11 @@ svg {
   display: block;
   max-width: 100%;
 }
+
 /*
   6. Remove built-in form typography styles
+
+	Mike's notes: I don't need these either. No forms in this app.
 */
 input,
 button,
@@ -41,6 +53,7 @@ textarea,
 select {
   font: inherit;
 }
+
 /*
   7. Avoid text overflows
 */
@@ -59,4 +72,19 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+#scrollable-area {
+  width: 50000px;
+  height: 50000px;
+  background-image: url("./img/forest-tile-512x512.jpg");
+  background-repeat: repeat;
 }
