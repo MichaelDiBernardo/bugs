@@ -1,6 +1,8 @@
 const numRocks = 1000;
 const gridSize = 51200 / 256;
 
+const rockSounds = [];
+
 function preloadAssets() {
   const imagesToPreload = ["./assets/img/rock1.png"];
 
@@ -35,6 +37,7 @@ function preloadSound(src) {
     audio.oncanplaythrough = resolve;
     audio.onerror = reject;
     audio.src = src;
+    rockSounds.push(audio);
   });
 }
 
@@ -91,6 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }px) rotate(${Math.random() * 720 - 360}deg)`;
     rock.style.opacity = "0";
     rock.style.transition = `all ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
+
+    rockSounds[Math.floor(Math.random() * rockSounds.length)].play();
 
     setTimeout(() => {
       rock.remove();
