@@ -107,24 +107,28 @@ function getSound(fileName) {
 }
 
 /**
- * Throw a rock and reveal the lovely prize beneath. Will it be a bug, or
- * something else? This is an event handler for the rock element.
+ * Creates an event handler that:
+ * - throws the rock to reveal the lovely prize beneath. (Will it be a bug, or * something else?)
+ * - Plays the 'discovery sound' associated with the bug.
  */
-function flingRock(event) {
-  const rock = event.currentTarget;
-  const rockContainer = rock.closest(".rock-container");
-  const bug = rockContainer.querySelector(".bug");
+function makeFlingRockHandler(discoverySound) {
+  return () => {
+    const rock = event.currentTarget;
+    const rockContainer = rock.closest(".rock-container");
+    const bug = rockContainer.querySelector(".bug");
 
-  const rockFlingDuration = 500 + Math.random() * 500;
+    const rockFlingDuration = 500 + Math.random() * 500;
 
-  animateRock(rock, rockFlingDuration);
+    animateRock(rock, rockFlingDuration);
 
-  rockSounds[Math.floor(Math.random() * rockSounds.length)].play();
+    rockSounds[Math.floor(Math.random() * rockSounds.length)].play();
 
-  setTimeout(() => {
-    rock.remove();
-    happyDance(bug);
-  }, rockFlingDuration);
+    setTimeout(() => {
+      rock.remove();
+      happyDance(bug);
+      discoverySound.play();
+    }, rockFlingDuration);
+  };
 }
 
 /**
@@ -155,6 +159,9 @@ function happyDance(bug) {
   }, bugDanceDuration);
 }
 
+/**
+ * Starts the game after DOMContentLoaded.
+ */
 async function startGame() {
   const splashScreen = document.getElementById("splash-screen");
   const scrollableArea = document.getElementById("scrollable-area");
@@ -172,8 +179,14 @@ async function startGame() {
     rockContainer.style.gridRow = location.x;
     rockContainer.style.gridColumn = location.y;
 
+    // Choose a random bug to put under the rock.
+    const randomBugProto = choose(bugProtos);
+
     const rockElement = rockContainer.querySelector(".rock");
-    rockElement.addEventListener("click", flingRock);
+    rockElement.addEventListener(
+      "click",
+      makeFlingRockHandler(randomBugProto.sound)
+    );
 
     // Select a random rock image
     const randomRockImage = choose(rockImages);
@@ -181,6 +194,10 @@ async function startGame() {
     // Set the src attribute of the img element inside the rock div
     const rockImg = rockElement.querySelector("img");
     rockImg.src = randomRockImage.src;
+
+    // Set the src attribute of the img element inside the bug div
+    const bugImg = rockContainer.querySelector(".bug img");
+    bugImg.src = randomBugProto.image.src;
 
     scrollableArea.appendChild(rockContainer);
   }
