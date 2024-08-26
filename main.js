@@ -90,21 +90,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function flingRock(event) {
     const rock = event.currentTarget;
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 1000 + Math.random() * 1000;
-    const duration = 500 + Math.random() * 500;
+    const rockContainer = rock.closest(".rock-container");
+    const bug = rockContainer.querySelector(".bug");
 
-    rock.style.transform = `translate(${Math.cos(angle) * distance}px, ${
-      Math.sin(angle) * distance
-    }px) rotate(${Math.random() * 720 - 360}deg)`;
-    rock.style.opacity = "0";
-    rock.style.transition = `all ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
+    const rockFlingDuration = 500 + Math.random() * 500;
+
+    animateRock(rock, rockFlingDuration);
 
     rockSounds[Math.floor(Math.random() * rockSounds.length)].play();
 
     setTimeout(() => {
       rock.remove();
-    }, duration);
+      happyDance(bug);
+    }, rockFlingDuration);
   }
 
   function initialize() {
@@ -123,3 +121,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initialize();
 });
+
+function happyDance(bug) {
+  bug.classList.add("pulsing");
+
+  setTimeout(() => {
+    bug.classList.remove("pulsing");
+  }, 5000);
+}
+
+function animateRock(rock, duration) {
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 1000 + Math.random() * 1000;
+
+  rock.style.transform = `translate(${Math.cos(angle) * distance}px, ${
+    Math.sin(angle) * distance
+  }px) rotate(${Math.random() * 720 - 360}deg)`;
+  rock.style.opacity = "0";
+  rock.style.transition = `all ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
+}
