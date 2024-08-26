@@ -98,7 +98,7 @@ function happyDance(bug) {
   }, bugDanceDuration);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+async function startGame() {
   const splashScreen = document.getElementById("splash-screen");
   const scrollableArea = document.getElementById("scrollable-area");
   const rockTemplate = document.getElementById("rock-template");
@@ -142,19 +142,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function initialize() {
-    preloadAssets()
-      .then(() => {
-        createRocks();
-      })
-      .catch((error) => {
-        console.error("Error preloading assets:", error);
-      })
-      .finally(() => {
-        // Hide splashscreen regardless of whether prefetch was successful.
-        hideSplashScreen();
-      });
+  async function initialize() {
+    try {
+      await preloadAssets();
+    } catch (error) {
+      console.error("Error preloading assets:", error);
+    } finally {
+      createRocks();
+      hideSplashScreen();
+    }
   }
 
   initialize();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  startGame();
 });
