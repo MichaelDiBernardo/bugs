@@ -1,8 +1,13 @@
+// Settings. If you change the tilesize (256px) you also have to change it in
+// the CSS.
 const numRocks = 1000;
 const gridSize = 51200 / 256;
+const bugDanceDuration = 5000;
 
+// This will hold all the rock sounds once they are loaded.
 const rockSounds = [];
 
+// Prefetching stuff.
 function preloadAssets() {
   const imagesToPreload = [
     "./assets/img/rock1.png",
@@ -42,6 +47,55 @@ function preloadSound(src) {
     audio.src = src;
     rockSounds.push(audio);
   });
+}
+
+/**
+ * Throw a rock and reveal the lovely prize beneath. Will it be a bug, or
+ * something else? This is an event handler for the rock element.
+ */
+function flingRock(event) {
+  const rock = event.currentTarget;
+  const rockContainer = rock.closest(".rock-container");
+  const bug = rockContainer.querySelector(".bug");
+
+  const rockFlingDuration = 500 + Math.random() * 500;
+
+  animateRock(rock, rockFlingDuration);
+
+  rockSounds[Math.floor(Math.random() * rockSounds.length)].play();
+
+  setTimeout(() => {
+    rock.remove();
+    happyDance(bug);
+  }, rockFlingDuration);
+}
+
+/**
+ * Animate the rock fling
+ * @param {HTMLElement} rock  - The rock element to animate
+ * @param {number} duration - The duration of the animation in milliseconds
+ */
+function animateRock(rock, duration) {
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 1000 + Math.random() * 1000;
+
+  rock.style.transform = `translate(${Math.cos(angle) * distance}px, ${
+    Math.sin(angle) * distance
+  }px) rotate(${Math.random() * 720 - 360}deg)`;
+  rock.style.opacity = "0";
+  rock.style.transition = `all ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
+}
+
+/**
+ * Make the bug -- or bug-like equivalent -- dance.
+ * @param {HTMLElement} bug - The bug element to animate
+ */
+function happyDance(bug) {
+  bug.classList.add("pulsing");
+
+  setTimeout(() => {
+    bug.classList.remove("pulsing");
+  }, bugDanceDuration);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,23 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function flingRock(event) {
-    const rock = event.currentTarget;
-    const rockContainer = rock.closest(".rock-container");
-    const bug = rockContainer.querySelector(".bug");
-
-    const rockFlingDuration = 500 + Math.random() * 500;
-
-    animateRock(rock, rockFlingDuration);
-
-    rockSounds[Math.floor(Math.random() * rockSounds.length)].play();
-
-    setTimeout(() => {
-      rock.remove();
-      happyDance(bug);
-    }, rockFlingDuration);
-  }
-
   function initialize() {
     preloadAssets()
       .then(() => {
@@ -121,22 +158,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initialize();
 });
-
-function happyDance(bug) {
-  bug.classList.add("pulsing");
-
-  setTimeout(() => {
-    bug.classList.remove("pulsing");
-  }, 5000);
-}
-
-function animateRock(rock, duration) {
-  const angle = Math.random() * Math.PI * 2;
-  const distance = 1000 + Math.random() * 1000;
-
-  rock.style.transform = `translate(${Math.cos(angle) * distance}px, ${
-    Math.sin(angle) * distance
-  }px) rotate(${Math.random() * 720 - 360}deg)`;
-  rock.style.opacity = "0";
-  rock.style.transition = `all ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
-}
