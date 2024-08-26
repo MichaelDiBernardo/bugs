@@ -82,6 +82,31 @@ body {
   overflow: auto;
 }
 
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#splash-screen img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+#splash-screen h1 {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
 #scrollable-area {
   width: 51200px;
   height: 51200px;

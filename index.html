@@ -71,7 +71,16 @@
       content="https://mikedebo.com/nora-looks-for-bugs/share.jpg"
     />
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/fonts.css" />
     <link rel="stylesheet" href="style.css" />
 
     <!-- Javscript -->
@@ -87,7 +96,12 @@
   </head>
 
   <body>
-    <div id="scrollable-area"></div>
+    <div id="splash-screen">
+      <img src="android-chrome-512x512.png" alt="Nora Looks For Bugs Logo" />
+      <h1 class="extrabold">Nora Looks For Bugs</h1>
+    </div>
+
+    <div id="scrollable-area" style="display: none"></div>
 
     <template id="rock-template">
       <div class="rock">

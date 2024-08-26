@@ -1,9 +1,52 @@
 const numRocks = 1000;
 const gridSize = 51200 / 256;
 
+function preloadAssets() {
+  const imagesToPreload = ["./assets/img/rock1.png"];
+
+  const soundsToPreload = [
+    "./assets/sound/rock1.m4a",
+    "./assets/sound/rock2.m4a",
+    "./assets/sound/rock3.m4a",
+    "./assets/sound/rock4.m4a",
+    "./assets/sound/rock5.m4a",
+  ];
+
+  const preloadPromises = [
+    ...imagesToPreload.map((src) => preloadImage(src)),
+    ...soundsToPreload.map((src) => preloadSound(src)),
+  ];
+
+  return Promise.all(preloadPromises);
+}
+
+function preloadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = resolve;
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+function preloadSound(src) {
+  return new Promise((resolve, reject) => {
+    const audio = new Audio();
+    audio.oncanplaythrough = resolve;
+    audio.onerror = reject;
+    audio.src = src;
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  const splashScreen = document.getElementById("splash-screen");
   const scrollableArea = document.getElementById("scrollable-area");
   const rockTemplate = document.getElementById("rock-template");
+
+  function hideSplashScreen() {
+    splashScreen.style.display = "none";
+    scrollableArea.style.display = "grid";
+  }
 
   function createRockComponent(location) {
     const rock = rockTemplate.content.cloneNode(true).querySelector(".rock");
@@ -55,7 +98,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initialize() {
-    createRocks();
+    preloadAssets()
+      .then(() => {
+        createRocks();
+      })
+      .catch((error) => {
+        console.error("Error preloading assets:", error);
+      })
+      .finally(() => {
+        // Hide splashscreen regardless of whether prefetch was successful.
+        hideSplashScreen();
+      });
   }
 
   initialize();
