@@ -4,7 +4,10 @@ const gridSize = 51200 / 256;
 const rockSounds = [];
 
 function preloadAssets() {
-  const imagesToPreload = ["./assets/img/rock1.png"];
+  const imagesToPreload = [
+    "./assets/img/rock1.png",
+    "./assets/img/unicorn.png",
+  ];
 
   const soundsToPreload = [
     "./assets/sound/rock1.m4a",
@@ -52,11 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createRockComponent(location) {
-    const rock = rockTemplate.content.cloneNode(true).querySelector(".rock");
-    rock.style.gridRow = location.x;
-    rock.style.gridColumn = location.y;
-    rock.addEventListener("click", flingRock);
-    scrollableArea.appendChild(rock);
+    const rockContainer = rockTemplate.content
+      .cloneNode(true)
+      .querySelector(".rock-container");
+    rockContainer.style.gridRow = location.x;
+    rockContainer.style.gridColumn = location.y;
+    rockContainer.querySelector(".rock").addEventListener("click", flingRock);
+    scrollableArea.appendChild(rockContainer);
   }
 
   function createRocks() {

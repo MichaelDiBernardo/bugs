@@ -117,7 +117,14 @@ body {
   grid-template-rows: repeat(auto-fill, 256px);
 }
 
+.rock-container {
+  position: relative;
+}
+
 .rock {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 256px;
   height: 256px;
   cursor: pointer;
@@ -126,10 +133,19 @@ body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  z-index: 100;
 }
 
 .rock img {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+.bug {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  z-index: 50;
 }
