@@ -2,7 +2,7 @@
 // the CSS.
 const numRocks = 1000;
 const gridSize = 51200 / 256;
-const bugDanceDuration = 5000;
+const bugDanceDuration = 2000;
 const bugAgitateDuration = 1000;
 
 // One of these is randomly played whenever a rock is flung.
@@ -23,7 +23,15 @@ const rockSoundsFiles = [
   "rock4.m4a",
   "rock5.m4a",
 ];
-const rockImagesFiles = ["rock1.png"];
+
+const rockImagesFiles = [
+  "rock1.png",
+  "rock2.png",
+  "rock3.png",
+  "rock4.png",
+  "rock5.png",
+];
+
 const bugClickSoundsFiles = ["clickme1.m4a"];
 
 // A list of all the types of bugs or bug-like creatures. For each one of these,

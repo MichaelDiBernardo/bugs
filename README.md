@@ -6,9 +6,9 @@ A game in which a 2.5 year old will hopefully look for bugs under rocks before s
 
 - Forest floor texture from [here](https://www.texturemax.com/forest-floor-terrain-0006/)
 - PWA template from [here](https://github.com/nikkifurls/simplepwa)
+- Bugs from [here](https://www.cleanpng.com/)
+- Bug icon from [here](https://www.vecteezy.com/)
 
 ## Todo
 
 - Fix all the PWA assets, some are still default
-- Add things under rocks
-- Add ridiculous sounds
