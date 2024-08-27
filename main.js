@@ -3,6 +3,7 @@
 const numRocks = 1000;
 const gridSize = 51200 / 256;
 const bugDanceDuration = 5000;
+const bugAgitateDuration = 1000;
 
 // One of these is randomly played whenever a rock is flung.
 let rockSounds = [];
@@ -159,6 +160,17 @@ function happyDance(bug) {
   }, bugDanceDuration);
 }
 
+function agitateBug(event) {
+  const bug = event.currentTarget;
+  bug.classList.add("pulsing");
+
+  choose(bugClickSounds).play();
+
+  setTimeout(() => {
+    bug.classList.remove("pulsing");
+  }, bugAgitateDuration);
+}
+
 /**
  * Starts the game after DOMContentLoaded.
  */
@@ -194,6 +206,10 @@ async function startGame() {
     // Set the src attribute of the img element inside the rock div
     const rockImg = rockElement.querySelector("img");
     rockImg.src = randomRockImage.src;
+
+    // Make the bug agitate when clicked.
+    const bug = rockContainer.querySelector(".bug");
+    bug.addEventListener("click", agitateBug);
 
     // Set the src attribute of the img element inside the bug div
     const bugImg = rockContainer.querySelector(".bug img");
