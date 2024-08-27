@@ -169,10 +169,14 @@ function happyDance(bug) {
 }
 
 function agitateBug(event) {
-  const bug = event.currentTarget;
-  bug.classList.add("pulsing");
-
   choose(bugClickSounds).play();
+
+  const bug = event.currentTarget;
+  if (bug.classList.contains("pulsing")) {
+    return;
+  }
+
+  bug.classList.add("pulsing");
 
   setTimeout(() => {
     bug.classList.remove("pulsing");
