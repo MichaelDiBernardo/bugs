@@ -1,7 +1,7 @@
 // Settings. If you change the tilesize (256px) you also have to change it in
 // the CSS.
-const numRocks = 1000;
-const gridSize = 51200 / 256;
+const numRocks = 500;
+const gridSize = 25600 / 256;
 const bugDanceDuration = 2000;
 const bugAgitateDuration = 1000;
 
@@ -32,13 +32,43 @@ const rockImagesFiles = [
   "rock5.png",
 ];
 
-const bugClickSoundsFiles = ["clickme1.m4a"];
+const bugClickSoundsFiles = [
+  "clickme1.m4a",
+  "clickme2.m4a",
+  "clickme3.m4a",
+  "clickme4.m4a",
+  "clickme5.m4a",
+];
 
 // A list of all the types of bugs or bug-like creatures. For each one of these,
 // it's expected that there is an image for the bug in
 // ./assets/image/{bugType}.png, and an "discovery sound" in
 // ./assets/sound/{bugType}.m4a.
-const bugTypes = ["unicorn"];
+const bugTypes = [
+  "unicorn",
+  "ant",
+  "bee",
+  "beetle",
+  "butterfly",
+  "cake",
+  "cockroach",
+  "dinosaur",
+  "dragonfly",
+  "flower",
+  "fly",
+  "grasshopper",
+  "icecream",
+  "ladybug",
+  "mantis",
+  "mosquito",
+  "moth",
+  "pizza",
+  "rainbow",
+  "scorpion",
+  "snowman",
+  "termite",
+  "unicorn",
+];
 
 // A list of all the bug "prototypes" that can be included as a bug component. Each proto is like this:
 // {
