@@ -1,6 +1,6 @@
 {
   "name": "Nora Looks For Bugs",
-  "short_name": "Nora Looks For Bugs",
+  "short_name": "NoraBugs",
   "display": "standalone",
   "start_url": "./?utm_source=pwa_install",
   "scope": ".",

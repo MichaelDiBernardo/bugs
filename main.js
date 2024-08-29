@@ -97,6 +97,10 @@ function choose(array) {
  * computers failing for no discernible reason.
  */
 async function initializeGame() {
+  // Preload the CSS background texture.
+  await getImage("forest-tile-512x512.jpg");
+
+  // Preload all the "game assets."
   rockSounds = await Promise.all(rockSoundsFiles.map(getSound));
   rockImages = await Promise.all(rockImagesFiles.map(getImage));
   bugClickSounds = await Promise.all(bugClickSoundsFiles.map(getSound));
