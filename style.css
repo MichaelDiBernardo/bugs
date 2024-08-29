@@ -108,8 +108,8 @@ body {
 }
 
 #scrollable-area {
-  width: 51200px;
-  height: 51200px;
+  width: 25600px;
+  height: 25600px;
   background-image: url("./assets/img/forest-tile-512x512.jpg");
   background-repeat: repeat;
   display: grid;

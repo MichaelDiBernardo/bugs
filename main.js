@@ -1,6 +1,6 @@
-// Settings. If you change the tilesize (256px) you also have to change it in
-// the CSS.
-const numRocks = 500;
+// Settings. If you change the tilesize (256px) or the gridSize (25600px) you
+// also have to change those values in the CSS.
+const numRocks = 600;
 const gridSize = 25600 / 256;
 const bugDanceDuration = 2000;
 const bugAgitateDuration = 1000;
